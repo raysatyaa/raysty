@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tips Membangun Website Modern dengan Laravel</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Bootstrap CSS File -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- Tambahkan CSS kustom -->
+  <style>
+    :root {
+      --primary-color: #0078ff;
+      --secondary-color: #0078ff;
+      --dark-color: #1e1e1e;
+      --light-color: #f8f9fa;
+      --gradient: linear-gradient(135deg, #0078ff 0%, #00a2ff 100%);
+    }
+
+    /* Navbar styling */
+    .navbar-b {
+      transition: all .5s ease-in-out;
+      background-color: transparent;
+      padding-top: 1.563rem;
+      padding-bottom: 1.563rem;
+    }
+
+    .navbar-b.navbar-reduce {
+      box-shadow: 0px 6px 9px 0px rgba(0, 0, 0, 0.06);
+      background-color: #fff;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    .navbar-b.navbar-trans .nav-item, 
+    .navbar-b.navbar-reduce .nav-item {
+      position: relative;
+      padding-right: 10px;
+      padding-left: 0;
+    }
+
+    .navbar-b.navbar-trans .nav-link,
+    .navbar-b.navbar-reduce .nav-link {
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .navbar-b.navbar-trans .nav-link:hover,
+    .navbar-b.navbar-reduce .nav-link:hover {
+      color: #0078ff;
+    }
+
+    .navbar-b.navbar-trans .nav-link:before {
+      content: '';
+      position: absolute;
+      margin-left: 0px;
+      width: 0%;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      transition: all 500ms ease;
+      background-color: #0078ff;
+    }
+
+    .navbar-b.navbar-trans .nav-link:hover:before {
+      width: 35px;
+    }
+
+    .navbar-b.navbar-reduce .nav-link {
+      color: #0078ff;
+    }
+
+    .navbar-b.navbar-reduce .nav-link:before {
+      background-color: #0078ff;
+    }
+
+    .navbar-b .navbar-brand {
+      color: #fff;
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+
+    .navbar-b.navbar-reduce .navbar-brand {
+      color: #0078ff;
+    }
+
+    /* Content styling */
+    .post-box {
+      background: white;
+      border-radius: 4px;
+      box-shadow: 0 13px 8px -10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .article-content h3 {
+      color: #0078ff;
+    }
+
+    /* Button styling */
+    .button-rouded {
+      background: #0078ff;
+      color: #fff;
+      padding: 10px 24px;
+      transition: all 0.5s ease;
+    }
+
+    .button-rouded:hover {
+      background: #3393ff;
+      box-shadow: 0 0 30px rgba(0, 120, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Sidebar styling */
+    .widget-sidebar {
+      box-shadow: 0 13px 8px -10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-title {
+      color: #0078ff;
+      border-bottom: 2px solid #f8f9fa;
+    }
+
+    /* Tags styling yang baru */
+    .widget-tags {
+      margin-top: 30px;
+    }
+
+    .widget-tags ul {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .widget-tags ul li {
+      list-style: none;
+      margin: 0;
+    }
+
+    .widget-tags ul li a {
+      display: inline-block;
+      padding: 8px 16px;
+      background: #f8f9fa;
+      color: #4e4e4e;
+      border-radius: 20px;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 1px solid #eee;
+    }
+
+    .widget-tags ul li a:hover {
+      background: #2eca6a;
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(46, 202, 106, 0.2);
+    }
+
+    /* Comments styling */
+    .box-comments {
+      box-shadow: 0 13px 8px -10px rgba(0, 0, 0, 0.1);
+    }
+
+    .comment-details {
+      background: #f8f9fa;
+    }
+
+    /* Form styling */
+    .form-control:focus {
+      border-color: #0078ff;
+      box-shadow: 0 0 0 0.2rem rgba(0, 120, 255, 0.25);
+    }
+
+    /* Intro section */
+    .intro-single {
+      height: 350px;
+    }
+
+    .intro-single .intro-title {
+      color: #fff;
+      font-weight: 600;
+      font-size: 2.5rem;
+    }
+
+    .breadcrumb {
+      background-color: transparent;
+    }
+
+    .breadcrumb .breadcrumb-item:before {
+      color: #cde1f8;
+    }
+
+    .breadcrumb .breadcrumb-item.active {
+      color: #cde1f8;
+    }
+
+    .breadcrumb a {
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Tambahkan navbar di bawah tag body -->
+  <nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll" href="#page-top">RAYSTY</a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
+        aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link js-scroll" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll" href="#">Work</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll" href="#">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="intro intro-single route bg-image" style="background-image: url(img/overlay-bg.jpg)">
+    <div class="overlay-mf"></div>
+    <div class="intro-content display-table">
+      <div class="table-cell">
+        <div class="container">
+          <h2 class="intro-title mb-4">Tips Membangun Website Modern dengan Laravel</h2>
+          <ol class="breadcrumb d-flex justify-content-center">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Blog</a></li>
+            <li class="breadcrumb-item active">Laravel Development</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="blog-wrapper sect-pt4" id="blog">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="post-box">
+            <div class="post-thumb">
+              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" class="img-fluid" alt="">
+            </div>
+            <div class="post-meta">
+              <h1 class="article-title">Tips Membangun Website Modern dengan Laravel</h1>
+              <ul>
+                <li>
+                  <span class="ion-ios-person"></span>
+                  <a href="#">Ray Satya</a>
+                </li>
+                <li>
+                  <span class="ion-pricetag"></span>
+                  <a href="#">Web Development</a>
+                </li>
+                <li>
+                  <span class="ion-chatbox"></span>
+                  <a href="#">15 min read</a>
+                </li>
+              </ul>
+            </div>
+            <div class="article-content">
+              <p>
+                Laravel telah menjadi salah satu framework PHP yang paling populer untuk pengembangan web modern. Framework ini menawarkan berbagai fitur canggih yang memudahkan developer dalam membangun aplikasi web yang kompleks.
+              </p>
+              <h3>1. Setup Awal Project Laravel</h3>
+              <p>
+                Untuk memulai project Laravel, pastikan Anda telah menginstall Composer sebagai package manager PHP. Gunakan perintah berikut untuk membuat project baru:
+                <code>composer create-project laravel/laravel nama-project</code>
+              </p>
+              <h3>2. Implementasi Real-time Updates</h3>
+              <p>
+                Laravel menyediakan fitur broadcasting events yang memungkinkan Anda membuat fitur real-time seperti notifikasi dan chat. Integrasi dengan Pusher atau Laravel WebSockets membuat implementasi menjadi lebih mudah.
+              </p>
+              <h3>3. API Integration</h3>
+              <p>
+                Laravel Sanctum dan Passport adalah pilihan terbaik untuk mengamankan API Anda. Keduanya menyediakan cara yang elegant untuk menangani autentikasi API.
+              </p>
+              <blockquote class="blockquote">
+                <p class="mb-0">"Kunci dari pengembangan web modern adalah memahami kebutuhan pengguna dan mengimplementasikan solusi yang tepat."</p>
+              </blockquote>
+            </div>
+          </div>
+
+          <!-- Bagian Komentar -->
+          <div class="box-comments">
+            <div class="title-box-2">
+              <h4 class="title-comments title-left">Comments (5)</h4>
+            </div>
+            <ul class="list-comments">
+              <li>
+                <div class="comment-avatar">
+                  <img src="img/testimonial-2.jpg" alt="">
+                </div>
+                <div class="comment-details">
+                  <h4 class="comment-author">Budi Santoso</h4>
+                  <span>18 Mar 2024</span>
+                  <p>
+                    Artikel yang sangat membantu! Saya baru mulai belajar Laravel dan ini memberikan gambaran yang jelas tentang best practices.
+                  </p>
+                  <a href="3">Reply</a>
+                </div>
+              </li>
+              <li>
+                <div class="comment-avatar">
+                  <img src="img/testimonial-4.jpg" alt="">
+                </div>
+                <div class="comment-details">
+                  <h4 class="comment-author">Dewi Putri</h4>
+                  <span>17 Mar 2024</span>
+                  <p>
+                    Implementasi real-time updates dengan Laravel sangat menarik. Bisa share lebih detail tentang penggunaan Laravel WebSockets?
+                  </p>
+                  <a href="3">Reply</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Form Komentar -->
+          <div class="form-comments">
+            <div class="title-box-2">
+              <h3 class="title-left">
+                Leave a Reply
+              </h3>
+            </div>
+            <form class="form-mf">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="form-group">
+                    <input type="text" class="form-control input-mf" id="inputName" placeholder="Name *" required>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="form-group">
+                    <input type="email" class="form-control input-mf" id="inputEmail1" placeholder="Email *" required>
+                  </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <div class="form-group">
+                    <input type="url" class="form-control input-mf" id="inputUrl" placeholder="Website">
+                  </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <div class="form-group">
+                    <textarea id="textMessage" class="form-control input-mf" placeholder="Comment *" name="message"
+                      cols="45" rows="8" required></textarea>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <button type="submit" class="button button-a button-big button-rouded">Send Message</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-md-4">
+          <div class="widget-sidebar">
+            <h5 class="sidebar-title">Recent Post</h5>
+            <div class="sidebar-content">
+              <ul class="list-sidebar">
+                <li>
+                  <a href="blog-single-uiux.html">Prinsip Desain UI/UX yang Efektif</a>
+                </li>
+                <li>
+                  <a href="blog-single-tech.html">Tren Teknologi Web 2024</a>
+                </li>
+                <li>
+                  <a href="blog-single-laravel.html">Tips Membangun Website Modern dengan Laravel</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="widget-sidebar">
+            <h5 class="sidebar-title">Archives</h5>
+            <div class="sidebar-content">
+              <ul class="list-sidebar">
+                <li>
+                  <a href="#">March, 2024</a>
+                </li>
+                <li>
+                  <a href="#">February, 2024</a>
+                </li>
+                <li>
+                  <a href="#">January, 2024</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="widget-sidebar widget-tags">
+            <h5 class="sidebar-title">Tags</h5>
+            <div class="sidebar-content">
+              <ul>
+                <li><a href="#">Laravel</a></li>
+                <li><a href="#">PHP</a></li>
+                <li><a href="#">Web Development</a></li>
+                <li><a href="#">Backend</a></li>
+                <li><a href="#">Framework</a></li>
+                <li><a href="#">MVC</a></li>
+                <li><a href="#">Database</a></li>
+                <li><a href="#">API</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer section sama seperti template -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <div id="preloader"></div>
+
+  <!-- JavaScript Libraries -->
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-migrate.min.js"></script>
+  <script src="lib/popper/popper.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/counterup/jquery.waypoints.min.js"></script>
+  <script src="lib/counterup/jquery.counterup.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/lightbox/js/lightbox.min.js"></script>
+  <script src="lib/typed/typed.min.js"></script>
+  
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
